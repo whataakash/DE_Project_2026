@@ -1,0 +1,29 @@
+{
+  "team_number": "T0117",
+  "team": [
+    {
+      "role": "Group Lead",
+      "name": "Akash Pansari",
+      "enrollment_no": "2501010566",
+      "github_username": "whataakash"
+    },
+    {
+      "role": "Member 2",
+      "name": "",
+      "enrollment_no": "",
+      "github_username": ""
+    },
+    {
+      "role": "Member 3",
+      "name": "",
+      "enrollment_no": "",
+      "github_username": ""
+    },
+    {
+      "role": "Member 4",
+      "name": "",
+      "enrollment_no": "",
+      "github_username": ""
+    }
+  ]
+}
