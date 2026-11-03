@@ -22,10 +22,10 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | Akash Pansari | 2501010566 | @whataakash |
+| Group Lead | Akash Pansari | 2501010566 | whataakash |
 | Member 2 |Aayush Kumar |2501010011 | aayushkumar-nst|
-| Member 3 |Varun Jaiswal| 2501010631 |@Varun-J-24 |
-| Member 4 |Vedaant Chopra | 2501010502 | @vedaantc25502-lgtm|
+| Member 3 |Varun Jaiswal| 2501010631 |Varun-J-24 |
+| Member 4 |Vedaant Chopra | 2501010502 | vedaantc25502-lgtm|
 
 **Team No.:** T0117 · **Section:** B · **Repository URL:** https://github.com/whataakash/DE_Project_2026
 
