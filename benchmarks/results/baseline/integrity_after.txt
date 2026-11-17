@@ -1,0 +1,131 @@
+Pager usage is off.
+SET
+SET
+                                                             version
+---------------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 18.6 (Postgres.app) on aarch64-apple-darwin23.6.0, compiled by Apple clang version 15.0.0 (clang-1500.3.9.4), 64-bit
+(1 row)
+
+      table_name      | expected_rows | actual_rows | matches
+----------------------+---------------+-------------+---------
+ achievements         |            10 |          10 | t
+ courses              |            11 |          11 | t
+ daily_activity       |        189109 |      189109 | t
+ enrollments          |         37500 |       37500 | t
+ languages            |            10 |          10 | t
+ league_memberships   |         28598 |       28598 | t
+ learner_achievements |         38860 |       38860 | t
+ learners             |         30000 |       30000 | t
+ lesson_attempts      |        188300 |      188300 | t
+ lessons              |          1760 |        1760 | t
+ units                |           220 |         220 | t
+(11 rows)
+
+          check_name           | violations
+-------------------------------+------------
+ I1_attempt_without_enrollment |          0
+(1 row)
+
+        check_name         | violations
+---------------------------+------------
+ I2_daily_summary_mismatch |          0
+(1 row)
+
+    check_name     | violations
+-------------------+------------
+ I3_cohort_over_30 |          0
+(1 row)
+
+         check_name         | rows_found
+----------------------------+------------
+ D0_cohort_with_mixed_tiers |        960
+(1 row)
+
+        check_name         | violations
+---------------------------+------------
+ I4_enrollment_xp_mismatch |          0
+(1 row)
+
+        check_name         | violations
+---------------------------+------------
+ I5_membership_xp_mismatch |          0
+(1 row)
+
+          check_name          | rows_found
+------------------------------+------------
+ D1_attempt_before_enrollment |      12999
+(1 row)
+
+       check_name       | rows_found
+------------------------+------------
+ D2_attempt_before_join |      12221
+(1 row)
+
+           check_name           | rows_found
+--------------------------------+------------
+ D3_enrollment_after_export_end |        228
+(1 row)
+
+        check_name         | rows_found
+---------------------------+------------
+ D4_badge_after_export_end |         46
+(1 row)
+
+      check_name      | rows_found
+----------------------+------------
+ D5_badge_before_join |       4211
+(1 row)
+
+       check_name       | rows_found
+------------------------+------------
+ D6_referral_after_join |          0
+(1 row)
+
+           check_name            | rows_found
+---------------------------------+------------
+ D7_attempt_before_course_launch |          0
+(1 row)
+
+       diagnostic        | week_start | count
+-------------------------+------------+-------
+ D8_missing_rank_by_week | 2026-06-29 |   847
+(1 row)
+
+           check_name           | rows_found
+--------------------------------+------------
+ D9_completion_after_export_end |          1
+(1 row)
+
+          field          | count
+-------------------------+-------
+ missing_rank_and_result |   847
+ missing_referrer        | 21102
+ missing_completion      | 21574
+(3 rows)
+
+ cohorts | largest_cohort
+---------+----------------
+     960 |             30
+(1 row)
+
+      table_name      |             index_name              | constraint_type |                                                       definition
+----------------------+-------------------------------------+-----------------+-------------------------------------------------------------------------------------------------------------------------
+ achievements         | achievements_code_key               | u               | CREATE UNIQUE INDEX achievements_code_key ON duolingo.achievements USING btree (code)
+ achievements         | achievements_pkey                   | p               | CREATE UNIQUE INDEX achievements_pkey ON duolingo.achievements USING btree (achievement_id)
+ courses              | courses_from_lang_learning_lang_key | u               | CREATE UNIQUE INDEX courses_from_lang_learning_lang_key ON duolingo.courses USING btree (from_lang, learning_lang)
+ courses              | courses_pkey                        | p               | CREATE UNIQUE INDEX courses_pkey ON duolingo.courses USING btree (course_id)
+ daily_activity       | daily_activity_pkey                 | p               | CREATE UNIQUE INDEX daily_activity_pkey ON duolingo.daily_activity USING btree (learner_id, activity_date)
+ enrollments          | enrollments_pkey                    | p               | CREATE UNIQUE INDEX enrollments_pkey ON duolingo.enrollments USING btree (learner_id, course_id)
+ languages            | languages_language_name_key         | u               | CREATE UNIQUE INDEX languages_language_name_key ON duolingo.languages USING btree (language_name)
+ languages            | languages_pkey                      | p               | CREATE UNIQUE INDEX languages_pkey ON duolingo.languages USING btree (language_code)
+ league_memberships   | league_memberships_pkey             | p               | CREATE UNIQUE INDEX league_memberships_pkey ON duolingo.league_memberships USING btree (learner_id, week_start)
+ learner_achievements | learner_achievements_pkey           | p               | CREATE UNIQUE INDEX learner_achievements_pkey ON duolingo.learner_achievements USING btree (learner_id, achievement_id)
+ learners             | learners_email_key                  | u               | CREATE UNIQUE INDEX learners_email_key ON duolingo.learners USING btree (email)
+ learners             | learners_pkey                       | p               | CREATE UNIQUE INDEX learners_pkey ON duolingo.learners USING btree (learner_id)
+ learners             | learners_username_key               | u               | CREATE UNIQUE INDEX learners_username_key ON duolingo.learners USING btree (username)
+ lesson_attempts      | lesson_attempts_pkey                | p               | CREATE UNIQUE INDEX lesson_attempts_pkey ON duolingo.lesson_attempts USING btree (attempt_id)
+ lessons              | lessons_pkey                        | p               | CREATE UNIQUE INDEX lessons_pkey ON duolingo.lessons USING btree (lesson_id)
+ lessons              | lessons_unit_id_lesson_no_key       | u               | CREATE UNIQUE INDEX lessons_unit_id_lesson_no_key ON duolingo.lessons USING btree (unit_id, lesson_no)
+ units                | units_course_id_unit_no_key         | u               | CREATE UNIQUE INDEX units_course_id_unit_no_key ON duolingo.units USING btree (course_id, unit_no)
+ units                | units_pkey                          | p               | CREATE UNIQUE INDEX units_pkey ON duolingo.units USING btree (unit_id)
+(18 rows)

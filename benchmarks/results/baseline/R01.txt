@@ -1,0 +1,81 @@
+=== R01 run 1 ===
+Sort  (cost=53.22..54.02 rows=320 width=23) (actual time=0.348..0.357 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=67
+  ->  Nested Loop  (cost=1.47..39.91 rows=320 width=23) (actual time=0.052..0.125 rows=160.00 loops=1)
+        Buffers: shared hit=64
+        ->  Hash Join  (cost=1.19..6.19 rows=40 width=17) (actual time=0.033..0.058 rows=20.00 loops=1)
+              Hash Cond: (u.course_id = c.course_id)
+              Buffers: shared hit=3
+              ->  Seq Scan on units u  (cost=0.00..4.20 rows=220 width=21) (actual time=0.008..0.020 rows=220.00 loops=1)
+                    Buffers: shared hit=2
+              ->  Hash  (cost=1.17..1.17 rows=2 width=4) (actual time=0.016..0.017 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on courses c  (cost=0.00..1.17 rows=2 width=4) (actual time=0.006..0.007 rows=1.00 loops=1)
+                          Filter: (((from_lang)::text = 'en'::text) AND ((learning_lang)::text = 'es'::text))
+                          Rows Removed by Filter: 10
+                          Buffers: shared hit=1
+        ->  Index Scan using lessons_unit_id_lesson_no_key on lessons l  (cost=0.28..0.76 rows=8 width=14) (actual time=0.002..0.002 rows=8.00 loops=20)
+              Index Cond: (unit_id = u.unit_id)
+              Index Searches: 20
+              Buffers: shared hit=61
+Planning:
+  Buffers: shared hit=322
+Planning Time: 1.647 ms
+Execution Time: 0.416 ms
+=== R01 run 2 ===
+Sort  (cost=53.22..54.02 rows=320 width=23) (actual time=0.144..0.150 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=67
+  ->  Nested Loop  (cost=1.47..39.91 rows=320 width=23) (actual time=0.032..0.100 rows=160.00 loops=1)
+        Buffers: shared hit=64
+        ->  Hash Join  (cost=1.19..6.19 rows=40 width=17) (actual time=0.025..0.048 rows=20.00 loops=1)
+              Hash Cond: (u.course_id = c.course_id)
+              Buffers: shared hit=3
+              ->  Seq Scan on units u  (cost=0.00..4.20 rows=220 width=21) (actual time=0.006..0.016 rows=220.00 loops=1)
+                    Buffers: shared hit=2
+              ->  Hash  (cost=1.17..1.17 rows=2 width=4) (actual time=0.011..0.011 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on courses c  (cost=0.00..1.17 rows=2 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+                          Filter: (((from_lang)::text = 'en'::text) AND ((learning_lang)::text = 'es'::text))
+                          Rows Removed by Filter: 10
+                          Buffers: shared hit=1
+        ->  Index Scan using lessons_unit_id_lesson_no_key on lessons l  (cost=0.28..0.76 rows=8 width=14) (actual time=0.001..0.002 rows=8.00 loops=20)
+              Index Cond: (unit_id = u.unit_id)
+              Index Searches: 20
+              Buffers: shared hit=61
+Planning:
+  Buffers: shared hit=322
+Planning Time: 1.038 ms
+Execution Time: 0.210 ms
+=== R01 run 3 ===
+Sort  (cost=53.22..54.02 rows=320 width=23) (actual time=0.143..0.150 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=67
+  ->  Nested Loop  (cost=1.47..39.91 rows=320 width=23) (actual time=0.031..0.099 rows=160.00 loops=1)
+        Buffers: shared hit=64
+        ->  Hash Join  (cost=1.19..6.19 rows=40 width=17) (actual time=0.025..0.047 rows=20.00 loops=1)
+              Hash Cond: (u.course_id = c.course_id)
+              Buffers: shared hit=3
+              ->  Seq Scan on units u  (cost=0.00..4.20 rows=220 width=21) (actual time=0.006..0.016 rows=220.00 loops=1)
+                    Buffers: shared hit=2
+              ->  Hash  (cost=1.17..1.17 rows=2 width=4) (actual time=0.011..0.011 rows=1.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on courses c  (cost=0.00..1.17 rows=2 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+                          Filter: (((from_lang)::text = 'en'::text) AND ((learning_lang)::text = 'es'::text))
+                          Rows Removed by Filter: 10
+                          Buffers: shared hit=1
+        ->  Index Scan using lessons_unit_id_lesson_no_key on lessons l  (cost=0.28..0.76 rows=8 width=14) (actual time=0.001..0.002 rows=8.00 loops=20)
+              Index Cond: (unit_id = u.unit_id)
+              Index Searches: 20
+              Buffers: shared hit=61
+Planning:
+  Buffers: shared hit=322
+Planning Time: 0.953 ms
+Execution Time: 0.203 ms

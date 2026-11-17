@@ -51,6 +51,18 @@ Use a fresh database; scripts do not delete an existing schema. Set `PGOPTIONS='
 
 ---
 
+## CP2: baseline measured
+
+All **30 original queries** were executed **3 times each** with `EXPLAIN (ANALYZE, BUFFERS)` on the seed database. All 90 execution times and plans are saved. The sum of query averages is **3,481.530 ms**; the slowest is **R19: 2,882.957 ms**. Writes were rolled back, and post-benchmark row counts and five core integrity checks still pass. No tuning indexes or query rewrites were applied.
+
+See the [full timing table and plan explanations](docs/03_baseline_timings.md), [CSV summary](benchmarks/results/baseline/summary.csv), [environment and reproduction commands](benchmarks/results/baseline/environment.md), and [CP1/CP2 explained in simple words](docs/CP1_CP2_explained.md). Regenerate and validate the report from the saved measurements with:
+
+```bash
+python3 benchmarks/build_baseline_report.py
+```
+
+---
+
 ## How this project works
 
 | Phase | What you do | You submit | Counts toward | Marks |

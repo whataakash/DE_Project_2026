@@ -1,0 +1,51 @@
+=== R14 run 1 ===
+Sort  (cost=834.48..834.50 rows=8 width=79) (actual time=4.078..4.078 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=248
+  ->  HashAggregate  (cost=834.08..834.36 rows=8 width=79) (actual time=4.057..4.062 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=245
+        ->  Seq Scan on league_memberships  (cost=0.00..686.59 rows=9833 width=14) (actual time=0.008..2.284 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=245
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.328 ms
+Execution Time: 4.134 ms
+=== R14 run 2 ===
+Sort  (cost=834.48..834.50 rows=8 width=79) (actual time=3.857..3.858 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=248
+  ->  HashAggregate  (cost=834.08..834.36 rows=8 width=79) (actual time=3.839..3.843 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=245
+        ->  Seq Scan on league_memberships  (cost=0.00..686.59 rows=9833 width=14) (actual time=0.007..2.056 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=245
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.308 ms
+Execution Time: 3.913 ms
+=== R14 run 3 ===
+Sort  (cost=834.48..834.50 rows=8 width=79) (actual time=3.885..3.885 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=248
+  ->  HashAggregate  (cost=834.08..834.36 rows=8 width=79) (actual time=3.866..3.870 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=245
+        ->  Seq Scan on league_memberships  (cost=0.00..686.59 rows=9833 width=14) (actual time=0.006..2.114 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=245
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.297 ms
+Execution Time: 3.935 ms

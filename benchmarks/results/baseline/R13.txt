@@ -1,0 +1,36 @@
+=== R13 run 1 ===
+Seq Scan on learners l  (cost=743.00..1486.00 rows=15000 width=21) (actual time=9.037..9.037 rows=0.00 loops=1)
+  Filter: (NOT (ANY (learner_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 30000
+  Buffers: shared hit=736
+  SubPlan 1
+    ->  Seq Scan on learners r  (cost=0.00..668.00 rows=30000 width=4) (actual time=0.004..2.939 rows=30000.00 loops=1)
+          Buffers: shared hit=368
+Planning:
+  Buffers: shared hit=86
+Planning Time: 0.430 ms
+Execution Time: 9.097 ms
+=== R13 run 2 ===
+Seq Scan on learners l  (cost=743.00..1486.00 rows=15000 width=21) (actual time=8.801..8.801 rows=0.00 loops=1)
+  Filter: (NOT (ANY (learner_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 30000
+  Buffers: shared hit=736
+  SubPlan 1
+    ->  Seq Scan on learners r  (cost=0.00..668.00 rows=30000 width=4) (actual time=0.004..2.786 rows=30000.00 loops=1)
+          Buffers: shared hit=368
+Planning:
+  Buffers: shared hit=86
+Planning Time: 0.307 ms
+Execution Time: 8.852 ms
+=== R13 run 3 ===
+Seq Scan on learners l  (cost=743.00..1486.00 rows=15000 width=21) (actual time=9.109..9.109 rows=0.00 loops=1)
+  Filter: (NOT (ANY (learner_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 30000
+  Buffers: shared hit=736
+  SubPlan 1
+    ->  Seq Scan on learners r  (cost=0.00..668.00 rows=30000 width=4) (actual time=0.004..2.940 rows=30000.00 loops=1)
+          Buffers: shared hit=368
+Planning:
+  Buffers: shared hit=86
+Planning Time: 0.300 ms
+Execution Time: 9.159 ms

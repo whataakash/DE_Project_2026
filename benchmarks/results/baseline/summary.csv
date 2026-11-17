@@ -1,0 +1,31 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,0.276,0.210,0.203,0.416,Seq Scan on units | Seq Scan on courses | Index Scan using lessons_unit_id_lesson_no_key on lessons
+R02,READ,0.067,0.064,0.060,0.076,Index Scan using enrollments_pkey on enrollments | Seq Scan on courses
+R03,READ,0.240,0.124,0.115,0.482,Index Only Scan using daily_activity_pkey on daily_activity
+R04,READ,8.493,7.352,7.327,10.801,Index Scan using learners_pkey on learners | Seq Scan on lesson_attempts
+R05,READ,2.117,1.873,1.846,2.633,Index Scan using league_memberships_pkey on league_memberships | Seq Scan on league_memberships | Index Scan using learners_pkey on learners
+R06,READ,11.440,11.410,11.335,11.575,Index Scan using units_course_id_unit_no_key on units | Index Scan using lessons_unit_id_lesson_no_key on lessons | Seq Scan on lesson_attempts
+R07,READ,33.035,32.757,32.568,33.780,Seq Scan on lesson_attempts | Seq Scan on lessons | Seq Scan on units
+R08,READ,33.722,33.190,32.869,35.107,Seq Scan on lesson_attempts | Seq Scan on lessons
+R09,READ,9.033,8.470,8.287,10.342,Seq Scan on daily_activity
+R10,READ,8.557,8.315,8.289,9.067,Seq Scan on daily_activity | Index Scan using learners_pkey on learners
+R11,READ,0.041,0.035,0.032,0.057,Index Scan using learners_username_key on learners
+R12,READ,0.094,0.096,0.083,0.103,Index Scan using learner_achievements_pkey on learner_achievements | Seq Scan on achievements
+R13,READ,9.036,9.097,8.852,9.159,Seq Scan on learners
+R14,READ,3.994,3.935,3.913,4.134,Seq Scan on league_memberships
+R15,READ,2.700,2.743,2.547,2.810,Seq Scan on learners | Index Scan using daily_activity_pkey on daily_activity
+R16,READ,4.811,4.638,4.346,5.448,Index Scan using learners_username_key on learners
+R17,READ,25.717,25.600,25.398,26.154,Seq Scan on lesson_attempts
+R18,READ,11.792,11.807,11.550,12.018,Seq Scan on enrollments | Seq Scan on courses
+R19,READ,2882.957,2885.707,2869.939,2893.224,Index Scan using units_course_id_unit_no_key on units | Index Scan using lessons_unit_id_lesson_no_key on lessons | Seq Scan on lesson_attempts
+R20,READ,14.803,14.811,14.626,14.971,Seq Scan on lesson_attempts
+R21,READ,4.373,4.349,4.100,4.669,Index Only Scan using daily_activity_pkey on daily_activity
+R22,READ,64.984,65.064,61.075,68.813,Seq Scan on lesson_attempts
+R23,READ,11.199,11.244,11.061,11.292,Seq Scan on daily_activity | Seq Scan on learners
+R24,READ,44.766,44.742,43.882,45.673,Seq Scan on lesson_attempts | Seq Scan on lessons | Seq Scan on units
+R25,READ,205.131,208.126,199.096,208.172,Seq Scan on lesson_attempts | Seq Scan on learners
+W01,WRITE,1.801,1.391,0.965,3.048,(no scan)
+W02,WRITE,1.166,1.049,1.022,1.427,Index Scan using lesson_attempts_pkey on lesson_attempts
+W03,WRITE,0.698,0.698,0.684,0.713,(no scan)
+W04,WRITE,10.406,10.396,10.345,10.478,Seq Scan on league_memberships
+W05,WRITE,74.081,74.479,73.164,74.599,Seq Scan on achievements | Seq Scan on enrollments
