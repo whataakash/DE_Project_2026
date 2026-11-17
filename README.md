@@ -31,6 +31,26 @@
 
 ---
 
+## CP1: completed locally and verified
+
+The product-oriented [problem understanding](docs/01_problem_understanding.md) covers P1–P7, an assumed ICP, learner segments and product metrics. The [schema design report](docs/02_schema_design.md) contains the data dictionary, ER diagram, functional dependencies, normalization tradeoffs and observed data issues.
+
+Verified on **PostgreSQL 18.6**: all **11 CSVs** loaded with the expected counts, including **188,300 lesson attempts**; five core integrity checks found **zero violations**. All 30 supplied queries passed a planning check; all five writes executed and were rolled back. There are **18 constraint-created indexes** and no tuning indexes. This is CP1 verification, not baseline timing data.
+
+From this repository's root, with PostgreSQL running and its tools on your PATH:
+
+```bash
+unzip -n seed_data.zip
+createdb duolingo_cp1
+psql -X -v ON_ERROR_STOP=1 -d duolingo_cp1 -f sql/01_schema.sql
+psql -X -v ON_ERROR_STOP=1 -d duolingo_cp1 -f sql/02_load_data.sql
+psql -X -v ON_ERROR_STOP=1 -d duolingo_cp1 -f sql/03_integrity_checks.sql
+```
+
+Use a fresh database; scripts do not delete an existing schema. Set `PGOPTIONS='-c search_path=duolingo -c timezone=Asia/Kolkata'` for subsequent query/benchmark connections. Local CSV files are ignored by Git. See [actual integrity output](docs/02_integrity_results.txt), [workload compatibility results](docs/02_workload_compatibility.txt), and the [ER diagram](diagrams/er_diagram.png). Keep the database without tuning indexes for CP2.
+
+---
+
 ## How this project works
 
 | Phase | What you do | You submit | Counts toward | Marks |

@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+<rect width="1600" height="1600" fill="#f5f8fc"/>
+<style>text{font-family:Menlo,monospace;fill:#183046} .field{font-size:13px} .edge{fill:none;stroke:#4f7191;stroke-width:2} .label{font-size:11px;paint-order:stroke;stroke:#f5f8fc;stroke-width:5;stroke-linejoin:round}</style>
+<text x="35" y="35" font-size="25" font-weight="bold">Duolingo • CP1 entity relationship diagram</text>
+<text x="35" y="65" font-size="11">1 / 0..N = cardinality · FK labels are on the child · optional referral is 0..1 parent; languages → courses has two roles: from_lang and learning_lang</text>
+<polyline class="edge" points="365,170 435,170"/>
+<text class="label" x="365" y="153">1:0..N</text>
+<polyline class="edge" points="765,170 835,170"/>
+<text class="label" x="765" y="205">1 : 0..N</text>
+<polyline class="edge" points="1165,170 1235,170"/>
+<text class="label" x="1165" y="153">1 : 0..N</text>
+<polyline class="edge" points="600,269 600,450"/>
+<text class="label" x="610" y="380">1 : 0..N</text>
+<polyline class="edge" points="365,510 435,510"/>
+<text class="label" x="365" y="495">1 : 0..N</text>
+<polyline class="edge" points="1400,269 1400,450"/>
+<text class="label" x="1410" y="380">1 : 0..N</text>
+<polyline class="edge" points="365,660 910,660 910,510 1235,510"/>
+<text class="label" x="700" y="645">1 : 0..N — attempts</text>
+<polyline class="edge" points="110,688 110,1010"/>
+<text class="label" x="120" y="860">1 : 0..N</text>
+<polyline class="edge" points="260,688 260,930 600,930 600,1010"/>
+<text class="label" x="410" y="915">1 : 0..N</text>
+<polyline class="edge" points="365,675 800,675 800,950 1400,950 1400,1010"/>
+<text class="label" x="960" y="935">1 : 0..N — badges</text>
+<polyline class="edge" points="1165,1080 1235,1080"/>
+<text class="label" x="1165" y="1063">1 : 0..N</text>
+<polyline class="edge" points="35,540 15,540 15,745 65,745 65,688"/>
+<text class="label" x="40" y="770">0..1 : 0..N referral</text>
+<rect x="35" y="100" width="330" height="100" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M43,100 H357 Q365,100 365,108 V138 H35 V108 Q35,100 43,100" fill="#183f5a"/>
+<text x="47" y="125" style="fill:white" font-size="17" font-weight="bold">languages</text>
+<text class="field" x="47" y="159">PK language_code : varchar(2)</text>
+<text class="field" x="47" y="182">UQ language_name : text</text>
+<rect x="435" y="100" width="330" height="169" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M443,100 H757 Q765,100 765,108 V138 H435 V108 Q435,100 443,100" fill="#183f5a"/>
+<text x="447" y="125" style="fill:white" font-size="17" font-weight="bold">courses</text>
+<text class="field" x="447" y="159">PK course_id : integer</text>
+<text class="field" x="447" y="182">FK from_lang : varchar(2)</text>
+<text class="field" x="447" y="205">FK learning_lang : varchar(2)</text>
+<text class="field" x="447" y="228">title : text</text>
+<text class="field" x="447" y="251">launched_on : date</text>
+<rect x="835" y="100" width="330" height="169" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M843,100 H1157 Q1165,100 1165,108 V138 H835 V108 Q835,100 843,100" fill="#183f5a"/>
+<text x="847" y="125" style="fill:white" font-size="17" font-weight="bold">units</text>
+<text class="field" x="847" y="159">PK unit_id : integer</text>
+<text class="field" x="847" y="182">FK course_id : integer</text>
+<text class="field" x="847" y="205">unit_no : smallint</text>
+<text class="field" x="847" y="228">title : text</text>
+<text class="field" x="847" y="251">cefr_level : varchar(2)</text>
+<rect x="1235" y="100" width="330" height="169" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M1243,100 H1557 Q1565,100 1565,108 V138 H1235 V108 Q1235,100 1243,100" fill="#183f5a"/>
+<text x="1247" y="125" style="fill:white" font-size="17" font-weight="bold">lessons</text>
+<text class="field" x="1247" y="159">PK lesson_id : integer</text>
+<text class="field" x="1247" y="182">FK unit_id : integer</text>
+<text class="field" x="1247" y="205">lesson_no : smallint</text>
+<text class="field" x="1247" y="228">lesson_type : text</text>
+<text class="field" x="1247" y="251">xp_value : smallint</text>
+<rect x="35" y="450" width="330" height="238" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M43,450 H357 Q365,450 365,458 V488 H35 V458 Q35,450 43,450" fill="#183f5a"/>
+<text x="47" y="475" style="fill:white" font-size="17" font-weight="bold">learners</text>
+<text class="field" x="47" y="509">PK learner_id : integer</text>
+<text class="field" x="47" y="532">UQ username : varchar(64)</text>
+<text class="field" x="47" y="555">UQ email : text</text>
+<text class="field" x="47" y="578">country_code : varchar(2)</text>
+<text class="field" x="47" y="601">daily_goal_xp : smallint</text>
+<text class="field" x="47" y="624">subscription : text</text>
+<text class="field" x="47" y="647">FK referred_by : integer</text>
+<text class="field" x="47" y="670">joined_at : timestamptz</text>
+<rect x="435" y="450" width="330" height="169" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M443,450 H757 Q765,450 765,458 V488 H435 V458 Q435,450 443,450" fill="#183f5a"/>
+<text x="447" y="475" style="fill:white" font-size="17" font-weight="bold">enrollments</text>
+<text class="field" x="447" y="509">PK FK learner_id : integer</text>
+<text class="field" x="447" y="532">PK FK course_id : integer</text>
+<text class="field" x="447" y="555">enrolled_at : timestamptz</text>
+<text class="field" x="447" y="578">total_xp : integer</text>
+<text class="field" x="447" y="601">is_active : boolean</text>
+<rect x="1235" y="450" width="330" height="284" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M1243,450 H1557 Q1565,450 1565,458 V488 H1235 V458 Q1235,450 1243,450" fill="#183f5a"/>
+<text x="1247" y="475" style="fill:white" font-size="17" font-weight="bold">lesson_attempts</text>
+<text class="field" x="1247" y="509">PK attempt_id : bigint</text>
+<text class="field" x="1247" y="532">FK learner_id : integer</text>
+<text class="field" x="1247" y="555">FK lesson_id : integer</text>
+<text class="field" x="1247" y="578">started_at : timestamptz</text>
+<text class="field" x="1247" y="601">completed_at : timestamptz</text>
+<text class="field" x="1247" y="624">mistakes : smallint</text>
+<text class="field" x="1247" y="647">hearts_lost : smallint</text>
+<text class="field" x="1247" y="670">xp_earned : smallint</text>
+<text class="field" x="1247" y="693">is_perfect : boolean</text>
+<text class="field" x="1247" y="716">device : text</text>
+<rect x="35" y="1010" width="330" height="169" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M43,1010 H357 Q365,1010 365,1018 V1048 H35 V1018 Q35,1010 43,1010" fill="#183f5a"/>
+<text x="47" y="1035" style="fill:white" font-size="17" font-weight="bold">daily_activity</text>
+<text class="field" x="47" y="1069">PK FK learner_id : integer</text>
+<text class="field" x="47" y="1092">PK activity_date : date</text>
+<text class="field" x="47" y="1115">xp : integer</text>
+<text class="field" x="47" y="1138">lessons_completed : integer</text>
+<text class="field" x="47" y="1161">used_streak_freeze : boolean</text>
+<rect x="435" y="1010" width="330" height="215" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M443,1010 H757 Q765,1010 765,1018 V1048 H435 V1018 Q435,1010 443,1010" fill="#183f5a"/>
+<text x="447" y="1035" style="fill:white" font-size="17" font-weight="bold">league_memberships</text>
+<text class="field" x="447" y="1069">PK FK learner_id : integer</text>
+<text class="field" x="447" y="1092">PK week_start : date</text>
+<text class="field" x="447" y="1115">tier : text</text>
+<text class="field" x="447" y="1138">cohort_id : integer</text>
+<text class="field" x="447" y="1161">weekly_xp : integer</text>
+<text class="field" x="447" y="1184">final_rank : smallint</text>
+<text class="field" x="447" y="1207">result : text</text>
+<rect x="835" y="1010" width="330" height="123" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M843,1010 H1157 Q1165,1010 1165,1018 V1048 H835 V1018 Q835,1010 843,1010" fill="#183f5a"/>
+<text x="847" y="1035" style="fill:white" font-size="17" font-weight="bold">achievements</text>
+<text class="field" x="847" y="1069">PK achievement_id : integer</text>
+<text class="field" x="847" y="1092">UQ code : text</text>
+<text class="field" x="847" y="1115">name : text</text>
+<rect x="1235" y="1010" width="330" height="123" rx="8" fill="white" stroke="#96adbf"/>
+<path d="M1243,1010 H1557 Q1565,1010 1565,1018 V1048 H1235 V1018 Q1235,1010 1243,1010" fill="#183f5a"/>
+<text x="1247" y="1035" style="fill:white" font-size="17" font-weight="bold">learner_achievements</text>
+<text class="field" x="1247" y="1069">PK FK learner_id : integer</text>
+<text class="field" x="1247" y="1092">PK FK achievement_id : integer</text>
+<text class="field" x="1247" y="1115">earned_at : timestamptz</text>
+<text x="35" y="1340" font-size="14">M:N bridges: enrollments (learners ↔ courses); learner_achievements (learners ↔ achievements).</text></svg>

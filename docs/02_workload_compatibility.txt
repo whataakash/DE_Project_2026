@@ -1,0 +1,7 @@
+CP1 workload compatibility check — PostgreSQL 18.6
+Source: unchanged queries/workload_30.sql
+All 30 original queries successfully EXPLAINed (without ANALYZE).
+Planned: R01, R02, R03, R04, R05, R06, R07, R08, R09, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, W01, W02, W03, W04, W05
+All 5 write queries executed successfully in independent transactions and rolled back.
+Executed and rolled back: W01, W02, W03, W04, W05
+This is a compatibility check, not the CP2 benchmark or a timing report.

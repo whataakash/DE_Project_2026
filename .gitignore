@@ -1,0 +1,6 @@
+# Local datasets and PostgreSQL runtime
+seed_data/
+large_data/
+.local-postgres/
+.DS_Store
+__pycache__/
