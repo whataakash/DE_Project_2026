@@ -1,0 +1,90 @@
+=== R23 run 1 ===
+GroupAggregate  (cost=4921.18..4950.22 rows=3 width=13) (actual time=10.822..11.014 rows=2.00 loops=1)
+  Group Key: l.subscription
+  Buffers: shared hit=193 read=208
+  ->  Sort  (cost=4921.18..4930.85 rows=3867 width=9) (actual time=10.763..10.829 rows=3741.00 loops=1)
+        Sort Key: l.subscription, l.learner_id
+        Sort Method: quicksort  Memory: 207kB
+        Buffers: shared hit=193 read=208
+        ->  Hash Join  (cost=2647.31..4690.77 rows=3867 width=9) (actual time=5.414..9.647 rows=3741.00 loops=1)
+              Hash Cond: (d.learner_id = l.learner_id)
+              Buffers: shared hit=187 read=208
+              ->  Index Only Scan using idx_daily_act_date_xp on daily_activity d  (cost=0.43..1932.39 rows=42478 width=4) (actual time=0.007..1.767 rows=41704.00 loops=1)
+                    Index Cond: (activity_date >= '2026-06-24'::date)
+                    Filter: (xp > 0)
+                    Rows Removed by Filter: 6002
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=186
+              ->  Hash  (cost=1964.05..1964.05 rows=54626 width=9) (actual time=5.374..5.374 rows=53570.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2772kB
+                    Buffers: shared hit=1 read=208
+                    ->  Index Only Scan using idx_learners_country_sub on learners l  (cost=0.42..1964.05 rows=54626 width=9) (actual time=0.302..3.233 rows=53570.00 loops=1)
+                          Index Cond: ((country_code = 'IN'::text) AND (subscription = ANY ('{SUPER,MAX}'::text[])))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=208
+Planning:
+  Buffers: shared hit=375 read=11
+Planning Time: 0.745 ms
+Execution Time: 11.041 ms
+=== R23 run 2 ===
+GroupAggregate  (cost=4921.18..4950.22 rows=3 width=13) (actual time=9.383..9.576 rows=2.00 loops=1)
+  Group Key: l.subscription
+  Buffers: shared hit=401
+  ->  Sort  (cost=4921.18..4930.85 rows=3867 width=9) (actual time=9.329..9.396 rows=3741.00 loops=1)
+        Sort Key: l.subscription, l.learner_id
+        Sort Method: quicksort  Memory: 207kB
+        Buffers: shared hit=401
+        ->  Hash Join  (cost=2647.31..4690.77 rows=3867 width=9) (actual time=4.251..8.305 rows=3741.00 loops=1)
+              Hash Cond: (d.learner_id = l.learner_id)
+              Buffers: shared hit=395
+              ->  Index Only Scan using idx_daily_act_date_xp on daily_activity d  (cost=0.43..1932.39 rows=42478 width=4) (actual time=0.006..1.737 rows=41704.00 loops=1)
+                    Index Cond: (activity_date >= '2026-06-24'::date)
+                    Filter: (xp > 0)
+                    Rows Removed by Filter: 6002
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=186
+              ->  Hash  (cost=1964.05..1964.05 rows=54626 width=9) (actual time=4.208..4.209 rows=53570.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2772kB
+                    Buffers: shared hit=209
+                    ->  Index Only Scan using idx_learners_country_sub on learners l  (cost=0.42..1964.05 rows=54626 width=9) (actual time=0.012..2.095 rows=53570.00 loops=1)
+                          Index Cond: ((country_code = 'IN'::text) AND (subscription = ANY ('{SUPER,MAX}'::text[])))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=209
+Planning:
+  Buffers: shared hit=386
+Planning Time: 0.523 ms
+Execution Time: 9.600 ms
+=== R23 run 3 ===
+GroupAggregate  (cost=4921.18..4950.22 rows=3 width=13) (actual time=9.431..9.627 rows=2.00 loops=1)
+  Group Key: l.subscription
+  Buffers: shared hit=401
+  ->  Sort  (cost=4921.18..4930.85 rows=3867 width=9) (actual time=9.376..9.441 rows=3741.00 loops=1)
+        Sort Key: l.subscription, l.learner_id
+        Sort Method: quicksort  Memory: 207kB
+        Buffers: shared hit=401
+        ->  Hash Join  (cost=2647.31..4690.77 rows=3867 width=9) (actual time=4.500..8.267 rows=3741.00 loops=1)
+              Hash Cond: (d.learner_id = l.learner_id)
+              Buffers: shared hit=395
+              ->  Index Only Scan using idx_daily_act_date_xp on daily_activity d  (cost=0.43..1932.39 rows=42478 width=4) (actual time=0.007..1.713 rows=41704.00 loops=1)
+                    Index Cond: (activity_date >= '2026-06-24'::date)
+                    Filter: (xp > 0)
+                    Rows Removed by Filter: 6002
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=186
+              ->  Hash  (cost=1964.05..1964.05 rows=54626 width=9) (actual time=4.435..4.435 rows=53570.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2772kB
+                    Buffers: shared hit=209
+                    ->  Index Only Scan using idx_learners_country_sub on learners l  (cost=0.42..1964.05 rows=54626 width=9) (actual time=0.012..2.213 rows=53570.00 loops=1)
+                          Index Cond: ((country_code = 'IN'::text) AND (subscription = ANY ('{SUPER,MAX}'::text[])))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=209
+Planning:
+  Buffers: shared hit=386
+Planning Time: 0.522 ms
+Execution Time: 9.650 ms

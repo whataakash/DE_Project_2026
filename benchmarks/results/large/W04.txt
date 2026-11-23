@@ -1,0 +1,93 @@
+=== W04 run 1 ===
+Update on league_memberships lm  (cost=1753.55..17330.83 rows=0 width=0) (actual time=232.413..232.415 rows=0.00 loops=1)
+  Buffers: shared hit=190766 read=6182 dirtied=6140 written=210
+  ->  Hash Join  (cost=1753.55..17330.83 rows=2028 width=108) (actual time=4.915..57.644 rows=13294.00 loops=1)
+        Hash Cond: ((lm.learner_id = r.learner_id) AND (lm.week_start = r.week_start))
+        Buffers: shared hit=45 read=4629
+        ->  Seq Scan on league_memberships lm  (cost=0.00..10076.36 rows=546036 width=14) (actual time=0.025..21.376 rows=546036.00 loops=1)
+              Buffers: shared hit=41 read=4575
+        ->  Hash  (cost=1552.88..1552.88 rows=13378 width=56) (actual time=4.873..4.873 rows=13294.00 loops=1)
+              Buckets: 16384  Batches: 1  Memory Usage: 1271kB
+              Buffers: shared hit=4 read=54
+              ->  Subquery Scan on r  (cost=0.48..1552.88 rows=13378 width=56) (actual time=0.037..4.073 rows=13294.00 loops=1)
+                    Buffers: shared hit=4 read=54
+                    ->  WindowAgg  (cost=0.48..1419.10 rows=13378 width=24) (actual time=0.031..3.171 rows=13294.00 loops=1)
+                          Window: w1 AS (PARTITION BY league_memberships.cohort_id ORDER BY league_memberships.weekly_xp, league_memberships.learner_id ROWS UNBOUNDED PRECEDING)
+                          Storage: Memory  Maximum Storage: 17kB
+                          Buffers: shared hit=4 read=54
+                          ->  Incremental Sort  (cost=0.48..1151.54 rows=13378 width=16) (actual time=0.025..1.924 rows=13294.00 loops=1)
+                                Sort Key: league_memberships.cohort_id, league_memberships.weekly_xp DESC, league_memberships.learner_id
+                                Presorted Key: league_memberships.cohort_id, league_memberships.weekly_xp
+                                Full-sort Groups: 383  Sort Method: quicksort  Average Memory: 26kB  Peak Memory: 26kB
+                                Buffers: shared hit=4 read=54
+                                ->  Index Only Scan using idx_leagues_week_cohort_xp on league_memberships  (cost=0.42..597.93 rows=13378 width=16) (actual time=0.014..1.040 rows=13294.00 loops=1)
+                                      Index Cond: (week_start = '2026-06-29'::date)
+                                      Heap Fetches: 0
+                                      Index Searches: 1
+                                      Buffers: shared hit=1 read=54
+Planning:
+  Buffers: shared hit=238 read=9
+Planning Time: 0.661 ms
+Execution Time: 232.482 ms
+=== W04 run 2 ===
+Update on league_memberships lm  (cost=2074.12..17894.38 rows=0 width=0) (actual time=124.489..124.490 rows=0.00 loops=1)
+  Buffers: shared hit=219352 read=45 dirtied=264 written=171
+  ->  Hash Join  (cost=2074.12..17894.38 rows=2060 width=108) (actual time=13.449..60.094 rows=13294.00 loops=1)
+        Hash Cond: ((lm.learner_id = r.learner_id) AND (lm.week_start = r.week_start))
+        Buffers: shared hit=18129 read=45 dirtied=93
+        ->  Seq Scan on league_memberships lm  (cost=0.00..10233.53 rows=554553 width=14) (actual time=0.003..20.289 rows=546036.00 loops=1)
+              Buffers: shared hit=4643 read=45
+        ->  Hash  (cost=1870.31..1870.31 rows=13587 width=56) (actual time=13.430..13.431 rows=13294.00 loops=1)
+              Buckets: 16384  Batches: 1  Memory Usage: 1271kB
+              Buffers: shared hit=13486 dirtied=93
+              ->  Subquery Scan on r  (cost=0.51..1870.31 rows=13587 width=56) (actual time=0.041..12.523 rows=13294.00 loops=1)
+                    Buffers: shared hit=13486 dirtied=93
+                    ->  WindowAgg  (cost=0.51..1734.44 rows=13587 width=24) (actual time=0.038..11.693 rows=13294.00 loops=1)
+                          Window: w1 AS (PARTITION BY league_memberships.cohort_id ORDER BY league_memberships.weekly_xp, league_memberships.learner_id ROWS UNBOUNDED PRECEDING)
+                          Storage: Memory  Maximum Storage: 17kB
+                          Buffers: shared hit=13486 dirtied=93
+                          ->  Incremental Sort  (cost=0.51..1462.70 rows=13587 width=16) (actual time=0.034..10.472 rows=13294.00 loops=1)
+                                Sort Key: league_memberships.cohort_id, league_memberships.weekly_xp DESC, league_memberships.learner_id
+                                Presorted Key: league_memberships.cohort_id, league_memberships.weekly_xp
+                                Full-sort Groups: 383  Sort Method: quicksort  Average Memory: 26kB  Peak Memory: 26kB
+                                Buffers: shared hit=13486 dirtied=93
+                                ->  Index Only Scan using idx_leagues_week_cohort_xp on league_memberships  (cost=0.42..900.43 rows=13587 width=16) (actual time=0.006..9.526 rows=13294.00 loops=1)
+                                      Index Cond: (week_start = '2026-06-29'::date)
+                                      Heap Fetches: 26588
+                                      Index Searches: 1
+                                      Buffers: shared hit=13483 dirtied=93
+Planning:
+  Buffers: shared hit=249 dirtied=1
+Planning Time: 0.339 ms
+Execution Time: 124.554 ms
+=== W04 run 3 ===
+Update on league_memberships lm  (cost=2553.98..18752.20 rows=0 width=0) (actual time=131.889..131.890 rows=0.00 loops=1)
+  Buffers: shared hit=219781 dirtied=172 written=171
+  ->  Hash Join  (cost=2553.98..18752.20 rows=2109 width=108) (actual time=12.388..56.489 rows=13294.00 loops=1)
+        Hash Cond: ((lm.learner_id = r.learner_id) AND (lm.week_start = r.week_start))
+        Buffers: shared hit=18276
+        ->  Seq Scan on league_memberships lm  (cost=0.00..10478.02 rows=567802 width=14) (actual time=0.004..19.632 rows=546036.00 loops=1)
+              Buffers: shared hit=4800
+        ->  Hash  (cost=2345.32..2345.32 rows=13911 width=56) (actual time=12.372..12.373 rows=13294.00 loops=1)
+              Buckets: 16384  Batches: 1  Memory Usage: 1271kB
+              Buffers: shared hit=13476
+              ->  Subquery Scan on r  (cost=0.54..2345.32 rows=13911 width=56) (actual time=0.047..11.559 rows=13294.00 loops=1)
+                    Buffers: shared hit=13476
+                    ->  WindowAgg  (cost=0.54..2206.21 rows=13911 width=24) (actual time=0.041..10.752 rows=13294.00 loops=1)
+                          Window: w1 AS (PARTITION BY league_memberships.cohort_id ORDER BY league_memberships.weekly_xp, league_memberships.learner_id ROWS UNBOUNDED PRECEDING)
+                          Storage: Memory  Maximum Storage: 17kB
+                          Buffers: shared hit=13476
+                          ->  Incremental Sort  (cost=0.54..1927.99 rows=13911 width=16) (actual time=0.037..9.579 rows=13294.00 loops=1)
+                                Sort Key: league_memberships.cohort_id, league_memberships.weekly_xp DESC, league_memberships.learner_id
+                                Presorted Key: league_memberships.cohort_id, league_memberships.weekly_xp
+                                Full-sort Groups: 383  Sort Method: quicksort  Average Memory: 26kB  Peak Memory: 26kB
+                                Buffers: shared hit=13476
+                                ->  Index Only Scan using idx_leagues_week_cohort_xp on league_memberships  (cost=0.42..1352.32 rows=13911 width=16) (actual time=0.006..8.725 rows=13294.00 loops=1)
+                                      Index Cond: (week_start = '2026-06-29'::date)
+                                      Heap Fetches: 26588
+                                      Index Searches: 1
+                                      Buffers: shared hit=13473
+Planning:
+  Buffers: shared hit=249
+Planning Time: 0.329 ms
+Execution Time: 131.956 ms

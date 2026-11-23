@@ -1,0 +1,105 @@
+=== R07 run 1 ===
+Limit  (cost=16430.25..16430.30 rows=20 width=52) (actual time=122.375..122.377 rows=20.00 loops=1)
+  Buffers: shared hit=830 read=3475 written=226
+  ->  Sort  (cost=16430.25..16449.31 rows=7627 width=52) (actual time=122.374..122.375 rows=20.00 loops=1)
+        Sort Key: (round(avg(a.mistakes), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=830 read=3475 written=226
+        ->  HashAggregate  (cost=15865.03..16227.29 rows=7627 width=52) (actual time=122.266..122.349 rows=160.00 loops=1)
+              Group Key: l.lesson_id, u.unit_no
+              Filter: (count(*) >= 100)
+              Batches: 1  Memory Usage: 561kB
+              Buffers: shared hit=827 read=3475 written=226
+              ->  Nested Loop  (cost=0.98..12584.76 rows=328027 width=16) (actual time=0.013..75.845 rows=903059.00 loops=1)
+                    Buffers: shared hit=827 read=3475 written=226
+                    ->  Nested Loop  (cost=0.55..76.32 rows=160 width=12) (actual time=0.007..0.066 rows=160.00 loops=1)
+                          Buffers: shared hit=44
+                          ->  Index Only Scan using idx_units_course on units u  (cost=0.27..10.37 rows=20 width=8) (actual time=0.003..0.016 rows=20.00 loops=1)
+                                Index Cond: (course_id = 1)
+                                Heap Fetches: 20
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Index Only Scan using idx_lessons_unit on lessons l  (cost=0.28..3.22 rows=8 width=12) (actual time=0.001..0.002 rows=8.00 loops=20)
+                                Index Cond: (unit_id = u.unit_id)
+                                Heap Fetches: 0
+                                Index Searches: 20
+                                Buffers: shared hit=41
+                    ->  Index Only Scan using idx_attempts_lesson_mistakes on lesson_attempts a  (cost=0.43..57.68 rows=2050 width=8) (actual time=0.003..0.279 rows=5644.12 loops=160)
+                          Index Cond: (lesson_id = l.lesson_id)
+                          Heap Fetches: 0
+                          Index Searches: 160
+                          Buffers: shared hit=783 read=3475 written=226
+Planning:
+  Buffers: shared hit=408 read=1
+Planning Time: 0.686 ms
+Execution Time: 122.437 ms
+=== R07 run 2 ===
+Limit  (cost=16430.25..16430.30 rows=20 width=52) (actual time=108.794..108.796 rows=20.00 loops=1)
+  Buffers: shared hit=4305
+  ->  Sort  (cost=16430.25..16449.31 rows=7627 width=52) (actual time=108.794..108.795 rows=20.00 loops=1)
+        Sort Key: (round(avg(a.mistakes), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=4305
+        ->  HashAggregate  (cost=15865.03..16227.29 rows=7627 width=52) (actual time=108.677..108.770 rows=160.00 loops=1)
+              Group Key: l.lesson_id, u.unit_no
+              Filter: (count(*) >= 100)
+              Batches: 1  Memory Usage: 561kB
+              Buffers: shared hit=4302
+              ->  Nested Loop  (cost=0.98..12584.76 rows=328027 width=16) (actual time=0.013..61.962 rows=903059.00 loops=1)
+                    Buffers: shared hit=4302
+                    ->  Nested Loop  (cost=0.55..76.32 rows=160 width=12) (actual time=0.007..0.077 rows=160.00 loops=1)
+                          Buffers: shared hit=44
+                          ->  Index Only Scan using idx_units_course on units u  (cost=0.27..10.37 rows=20 width=8) (actual time=0.003..0.020 rows=20.00 loops=1)
+                                Index Cond: (course_id = 1)
+                                Heap Fetches: 20
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Index Only Scan using idx_lessons_unit on lessons l  (cost=0.28..3.22 rows=8 width=12) (actual time=0.001..0.002 rows=8.00 loops=20)
+                                Index Cond: (unit_id = u.unit_id)
+                                Heap Fetches: 0
+                                Index Searches: 20
+                                Buffers: shared hit=41
+                    ->  Index Only Scan using idx_attempts_lesson_mistakes on lesson_attempts a  (cost=0.43..57.68 rows=2050 width=8) (actual time=0.003..0.188 rows=5644.12 loops=160)
+                          Index Cond: (lesson_id = l.lesson_id)
+                          Heap Fetches: 0
+                          Index Searches: 160
+                          Buffers: shared hit=4258
+Planning:
+  Buffers: shared hit=409
+Planning Time: 0.660 ms
+Execution Time: 108.864 ms
+=== R07 run 3 ===
+Limit  (cost=16430.25..16430.30 rows=20 width=52) (actual time=107.247..107.249 rows=20.00 loops=1)
+  Buffers: shared hit=4305
+  ->  Sort  (cost=16430.25..16449.31 rows=7627 width=52) (actual time=107.246..107.247 rows=20.00 loops=1)
+        Sort Key: (round(avg(a.mistakes), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=4305
+        ->  HashAggregate  (cost=15865.03..16227.29 rows=7627 width=52) (actual time=107.132..107.221 rows=160.00 loops=1)
+              Group Key: l.lesson_id, u.unit_no
+              Filter: (count(*) >= 100)
+              Batches: 1  Memory Usage: 561kB
+              Buffers: shared hit=4302
+              ->  Nested Loop  (cost=0.98..12584.76 rows=328027 width=16) (actual time=0.013..60.858 rows=903059.00 loops=1)
+                    Buffers: shared hit=4302
+                    ->  Nested Loop  (cost=0.55..76.32 rows=160 width=12) (actual time=0.006..0.052 rows=160.00 loops=1)
+                          Buffers: shared hit=44
+                          ->  Index Only Scan using idx_units_course on units u  (cost=0.27..10.37 rows=20 width=8) (actual time=0.003..0.013 rows=20.00 loops=1)
+                                Index Cond: (course_id = 1)
+                                Heap Fetches: 20
+                                Index Searches: 1
+                                Buffers: shared hit=3
+                          ->  Index Only Scan using idx_lessons_unit on lessons l  (cost=0.28..3.22 rows=8 width=12) (actual time=0.001..0.001 rows=8.00 loops=20)
+                                Index Cond: (unit_id = u.unit_id)
+                                Heap Fetches: 0
+                                Index Searches: 20
+                                Buffers: shared hit=41
+                    ->  Index Only Scan using idx_attempts_lesson_mistakes on lesson_attempts a  (cost=0.43..57.68 rows=2050 width=8) (actual time=0.003..0.183 rows=5644.12 loops=160)
+                          Index Cond: (lesson_id = l.lesson_id)
+                          Heap Fetches: 0
+                          Index Searches: 160
+                          Buffers: shared hit=4258
+Planning:
+  Buffers: shared hit=409
+Planning Time: 0.669 ms
+Execution Time: 107.318 ms

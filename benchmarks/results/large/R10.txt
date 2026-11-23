@@ -1,0 +1,84 @@
+=== R10 run 1 ===
+Sort  (cost=3059.65..3059.66 rows=3 width=13) (actual time=229.583..229.584 rows=2.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=46558 read=7901 written=4937
+  ->  GroupAggregate  (cost=3058.12..3059.63 rows=3 width=13) (actual time=229.162..229.577 rows=2.00 loops=1)
+        Group Key: l.subscription
+        Buffers: shared hit=46555 read=7901 written=4937
+        ->  Sort  (cost=3058.12..3058.61 rows=198 width=5) (actual time=229.046..229.268 rows=13585.00 loops=1)
+              Sort Key: l.subscription
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=46555 read=7901 written=4937
+              ->  Nested Loop  (cost=0.71..3050.56 rows=198 width=5) (actual time=4.613..228.469 rows=13585.00 loops=1)
+                    Buffers: shared hit=46552 read=7901 written=4937
+                    ->  Index Only Scan using idx_daily_act_freezes on daily_activity d  (cost=0.29..1430.95 rows=198 width=4) (actual time=4.401..5.647 rows=13585.00 loops=1)
+                          Filter: (EXTRACT(year FROM activity_date) = '2026'::numeric)
+                          Rows Removed by Filter: 26934
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=112 written=82
+                    ->  Index Scan using learners_pkey on learners l  (cost=0.42..8.18 rows=1 width=9) (actual time=0.016..0.016 rows=1.00 loops=13585)
+                          Index Cond: (learner_id = d.learner_id)
+                          Index Searches: 13585
+                          Buffers: shared hit=46551 read=7789 written=4855
+Planning:
+  Buffers: shared hit=409 read=8 written=6
+Planning Time: 0.990 ms
+Execution Time: 229.609 ms
+=== R10 run 2 ===
+Sort  (cost=3059.65..3059.66 rows=3 width=13) (actual time=24.984..24.985 rows=2.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=54459
+  ->  GroupAggregate  (cost=3058.12..3059.63 rows=3 width=13) (actual time=24.513..24.978 rows=2.00 loops=1)
+        Group Key: l.subscription
+        Buffers: shared hit=54456
+        ->  Sort  (cost=3058.12..3058.61 rows=198 width=5) (actual time=24.396..24.638 rows=13585.00 loops=1)
+              Sort Key: l.subscription
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=54456
+              ->  Nested Loop  (cost=0.71..3050.56 rows=198 width=5) (actual time=1.435..23.857 rows=13585.00 loops=1)
+                    Buffers: shared hit=54453
+                    ->  Index Only Scan using idx_daily_act_freezes on daily_activity d  (cost=0.29..1430.95 rows=198 width=4) (actual time=1.430..2.444 rows=13585.00 loops=1)
+                          Filter: (EXTRACT(year FROM activity_date) = '2026'::numeric)
+                          Rows Removed by Filter: 26934
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=113
+                    ->  Index Scan using learners_pkey on learners l  (cost=0.42..8.18 rows=1 width=9) (actual time=0.001..0.001 rows=1.00 loops=13585)
+                          Index Cond: (learner_id = d.learner_id)
+                          Index Searches: 13585
+                          Buffers: shared hit=54340
+Planning:
+  Buffers: shared hit=417
+Planning Time: 0.577 ms
+Execution Time: 25.010 ms
+=== R10 run 3 ===
+Sort  (cost=3059.65..3059.66 rows=3 width=13) (actual time=21.185..21.188 rows=2.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=54459
+  ->  GroupAggregate  (cost=3058.12..3059.63 rows=3 width=13) (actual time=20.661..21.179 rows=2.00 loops=1)
+        Group Key: l.subscription
+        Buffers: shared hit=54456
+        ->  Sort  (cost=3058.12..3058.61 rows=198 width=5) (actual time=20.496..20.779 rows=13585.00 loops=1)
+              Sort Key: l.subscription
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=54456
+              ->  Nested Loop  (cost=0.71..3050.56 rows=198 width=5) (actual time=1.412..19.949 rows=13585.00 loops=1)
+                    Buffers: shared hit=54453
+                    ->  Index Only Scan using idx_daily_act_freezes on daily_activity d  (cost=0.29..1430.95 rows=198 width=4) (actual time=1.407..2.286 rows=13585.00 loops=1)
+                          Filter: (EXTRACT(year FROM activity_date) = '2026'::numeric)
+                          Rows Removed by Filter: 26934
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=113
+                    ->  Index Scan using learners_pkey on learners l  (cost=0.42..8.18 rows=1 width=9) (actual time=0.001..0.001 rows=1.00 loops=13585)
+                          Index Cond: (learner_id = d.learner_id)
+                          Index Searches: 13585
+                          Buffers: shared hit=54340
+Planning:
+  Buffers: shared hit=417
+Planning Time: 0.558 ms
+Execution Time: 21.227 ms

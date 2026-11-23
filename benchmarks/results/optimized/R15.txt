@@ -1,0 +1,57 @@
+=== R15 run 1 ===
+Aggregate  (cost=2925.11..2925.12 rows=1 width=16) (actual time=0.220..0.220 rows=1.00 loops=1)
+  Buffers: shared hit=1107 read=4
+  ->  Index Only Scan using idx_learners_joined on learners l  (cost=0.29..19.17 rows=344 width=4) (actual time=0.030..0.045 rows=344.00 loops=1)
+        Index Cond: ((joined_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (joined_at < '2026-02-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=1 read=4
+  SubPlan 1
+    ->  Index Scan using daily_activity_pkey on daily_activity d  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.19 loops=344)
+          Index Cond: ((learner_id = l.learner_id) AND (activity_date >= '2026-06-01'::date))
+          Filter: (xp > 0)
+          Rows Removed by Filter: 0
+          Index Searches: 344
+          Buffers: shared hit=1106
+Planning:
+  Buffers: shared hit=286
+Planning Time: 0.443 ms
+Execution Time: 0.243 ms
+=== R15 run 2 ===
+Aggregate  (cost=2925.11..2925.12 rows=1 width=16) (actual time=0.200..0.200 rows=1.00 loops=1)
+  Buffers: shared hit=1111
+  ->  Index Only Scan using idx_learners_joined on learners l  (cost=0.29..19.17 rows=344 width=4) (actual time=0.018..0.029 rows=344.00 loops=1)
+        Index Cond: ((joined_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (joined_at < '2026-02-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=5
+  SubPlan 1
+    ->  Index Scan using daily_activity_pkey on daily_activity d  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.19 loops=344)
+          Index Cond: ((learner_id = l.learner_id) AND (activity_date >= '2026-06-01'::date))
+          Filter: (xp > 0)
+          Rows Removed by Filter: 0
+          Index Searches: 344
+          Buffers: shared hit=1106
+Planning:
+  Buffers: shared hit=284
+Planning Time: 0.422 ms
+Execution Time: 0.221 ms
+=== R15 run 3 ===
+Aggregate  (cost=2925.11..2925.12 rows=1 width=16) (actual time=0.206..0.206 rows=1.00 loops=1)
+  Buffers: shared hit=1111
+  ->  Index Only Scan using idx_learners_joined on learners l  (cost=0.29..19.17 rows=344 width=4) (actual time=0.020..0.032 rows=344.00 loops=1)
+        Index Cond: ((joined_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (joined_at < '2026-02-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=5
+  SubPlan 1
+    ->  Index Scan using daily_activity_pkey on daily_activity d  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.19 loops=344)
+          Index Cond: ((learner_id = l.learner_id) AND (activity_date >= '2026-06-01'::date))
+          Filter: (xp > 0)
+          Rows Removed by Filter: 0
+          Index Searches: 344
+          Buffers: shared hit=1106
+Planning:
+  Buffers: shared hit=284
+Planning Time: 0.448 ms
+Execution Time: 0.229 ms

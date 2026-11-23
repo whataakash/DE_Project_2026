@@ -1,0 +1,87 @@
+=== R14 run 1 ===
+Finalize GroupAggregate  (cost=8252.51..8255.19 rows=8 width=79) (actual time=30.166..30.953 rows=8.00 loops=1)
+  Group Key: tier
+  Buffers: shared hit=19 read=846 written=737
+  ->  Gather Merge  (cost=8252.51..8254.72 rows=19 width=31) (actual time=30.156..30.940 rows=24.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=19 read=846 written=737
+        ->  Sort  (cost=7252.49..7252.51 rows=8 width=31) (actual time=28.932..28.932 rows=8.00 loops=3)
+              Sort Key: tier
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=19 read=846 written=737
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=7252.29..7252.37 rows=8 width=31) (actual time=28.894..28.895 rows=8.00 loops=3)
+                    Group Key: tier
+                    Batches: 1  Memory Usage: 32kB
+                    Buffers: shared hit=3 read=846 written=737
+                    Worker 0:  Batches: 1  Memory Usage: 32kB
+                    Worker 1:  Batches: 1  Memory Usage: 32kB
+                    ->  Parallel Index Only Scan using idx_leagues_week_tier on league_memberships  (cost=0.42..6130.53 rows=74784 width=14) (actual time=0.233..24.060 rows=59278.67 loops=3)
+                          Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=3 read=846 written=737
+Planning:
+  Buffers: shared hit=175
+Planning Time: 0.273 ms
+Execution Time: 30.991 ms
+=== R14 run 2 ===
+Finalize GroupAggregate  (cost=8252.51..8255.19 rows=8 width=79) (actual time=8.275..9.005 rows=8.00 loops=1)
+  Group Key: tier
+  Buffers: shared hit=865
+  ->  Gather Merge  (cost=8252.51..8254.72 rows=19 width=31) (actual time=8.259..8.985 rows=24.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=865
+        ->  Sort  (cost=7252.49..7252.51 rows=8 width=31) (actual time=6.663..6.664 rows=8.00 loops=3)
+              Sort Key: tier
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=865
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=7252.29..7252.37 rows=8 width=31) (actual time=6.646..6.646 rows=8.00 loops=3)
+                    Group Key: tier
+                    Batches: 1  Memory Usage: 32kB
+                    Buffers: shared hit=849
+                    Worker 0:  Batches: 1  Memory Usage: 32kB
+                    Worker 1:  Batches: 1  Memory Usage: 32kB
+                    ->  Parallel Index Only Scan using idx_leagues_week_tier on league_memberships  (cost=0.42..6130.53 rows=74784 width=14) (actual time=0.026..2.587 rows=59278.67 loops=3)
+                          Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=849
+Planning:
+  Buffers: shared hit=175
+Planning Time: 0.229 ms
+Execution Time: 9.044 ms
+=== R14 run 3 ===
+Finalize GroupAggregate  (cost=8252.51..8255.19 rows=8 width=79) (actual time=8.910..9.641 rows=8.00 loops=1)
+  Group Key: tier
+  Buffers: shared hit=865
+  ->  Gather Merge  (cost=8252.51..8254.72 rows=19 width=31) (actual time=8.888..9.609 rows=24.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=865
+        ->  Sort  (cost=7252.49..7252.51 rows=8 width=31) (actual time=6.765..6.765 rows=8.00 loops=3)
+              Sort Key: tier
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=865
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=7252.29..7252.37 rows=8 width=31) (actual time=6.745..6.746 rows=8.00 loops=3)
+                    Group Key: tier
+                    Batches: 1  Memory Usage: 32kB
+                    Buffers: shared hit=849
+                    Worker 0:  Batches: 1  Memory Usage: 32kB
+                    Worker 1:  Batches: 1  Memory Usage: 32kB
+                    ->  Parallel Index Only Scan using idx_leagues_week_tier on league_memberships  (cost=0.42..6130.53 rows=74784 width=14) (actual time=0.026..2.593 rows=59278.67 loops=3)
+                          Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=849
+Planning:
+  Buffers: shared hit=175
+Planning Time: 0.229 ms
+Execution Time: 9.681 ms

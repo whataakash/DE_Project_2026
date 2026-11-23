@@ -1,0 +1,114 @@
+=== R18 run 1 ===
+Sort  (cost=13175.46..13175.49 rows=11 width=44) (actual time=45.213..45.671 rows=11.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=22 read=4784
+  ->  Finalize GroupAggregate  (cost=13171.93..13175.27 rows=11 width=44) (actual time=45.200..45.663 rows=11.00 loops=1)
+        Group Key: c.title
+        Buffers: shared hit=19 read=4784
+        ->  Gather Merge  (cost=13171.93..13174.96 rows=26 width=44) (actual time=45.194..45.656 rows=33.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=19 read=4784
+              ->  Sort  (cost=12171.91..12171.94 rows=11 width=44) (actual time=43.319..43.321 rows=11.00 loops=3)
+                    Sort Key: c.title
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=19 read=4784
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=12171.61..12171.72 rows=11 width=44) (actual time=43.291..43.293 rows=11.00 loops=3)
+                          Group Key: c.title
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=3 read=4784
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.25..9046.61 rows=312500 width=36) (actual time=0.051..25.740 rows=250000.00 loops=3)
+                                Hash Cond: (e.course_id = c.course_id)
+                                Buffers: shared hit=3 read=4784
+                                ->  Parallel Seq Scan on enrollments e  (cost=0.00..7909.00 rows=312500 width=12) (actual time=0.030..6.085 rows=250000.00 loops=3)
+                                      Buffers: shared read=4784
+                                ->  Hash  (cost=1.11..1.11 rows=11 width=32) (actual time=0.017..0.017 rows=11.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on courses c  (cost=0.00..1.11 rows=11 width=32) (actual time=0.013..0.013 rows=11.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=289 read=10
+Planning Time: 0.607 ms
+Execution Time: 45.709 ms
+=== R18 run 2 ===
+Sort  (cost=13175.46..13175.49 rows=11 width=44) (actual time=45.015..45.749 rows=11.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=304 read=4502
+  ->  Finalize GroupAggregate  (cost=13171.93..13175.27 rows=11 width=44) (actual time=44.995..45.741 rows=11.00 loops=1)
+        Group Key: c.title
+        Buffers: shared hit=301 read=4502
+        ->  Gather Merge  (cost=13171.93..13174.96 rows=26 width=44) (actual time=44.990..45.730 rows=33.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=301 read=4502
+              ->  Sort  (cost=12171.91..12171.94 rows=11 width=44) (actual time=43.391..43.392 rows=11.00 loops=3)
+                    Sort Key: c.title
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=301 read=4502
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=12171.61..12171.72 rows=11 width=44) (actual time=43.362..43.363 rows=11.00 loops=3)
+                          Group Key: c.title
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=285 read=4502
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.25..9046.61 rows=312500 width=36) (actual time=0.062..25.788 rows=250000.00 loops=3)
+                                Hash Cond: (e.course_id = c.course_id)
+                                Buffers: shared hit=285 read=4502
+                                ->  Parallel Seq Scan on enrollments e  (cost=0.00..7909.00 rows=312500 width=12) (actual time=0.041..6.076 rows=250000.00 loops=3)
+                                      Buffers: shared hit=282 read=4502
+                                ->  Hash  (cost=1.11..1.11 rows=11 width=32) (actual time=0.017..0.018 rows=11.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on courses c  (cost=0.00..1.11 rows=11 width=32) (actual time=0.013..0.014 rows=11.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=299
+Planning Time: 0.348 ms
+Execution Time: 45.786 ms
+=== R18 run 3 ===
+Sort  (cost=13175.46..13175.49 rows=11 width=44) (actual time=43.982..44.757 rows=11.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=586 read=4220
+  ->  Finalize GroupAggregate  (cost=13171.93..13175.27 rows=11 width=44) (actual time=43.960..44.750 rows=11.00 loops=1)
+        Group Key: c.title
+        Buffers: shared hit=583 read=4220
+        ->  Gather Merge  (cost=13171.93..13174.96 rows=26 width=44) (actual time=43.955..44.744 rows=33.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=583 read=4220
+              ->  Sort  (cost=12171.91..12171.94 rows=11 width=44) (actual time=42.433..42.434 rows=11.00 loops=3)
+                    Sort Key: c.title
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=583 read=4220
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=12171.61..12171.72 rows=11 width=44) (actual time=42.406..42.407 rows=11.00 loops=3)
+                          Group Key: c.title
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=567 read=4220
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.25..9046.61 rows=312500 width=36) (actual time=0.065..25.298 rows=250000.00 loops=3)
+                                Hash Cond: (e.course_id = c.course_id)
+                                Buffers: shared hit=567 read=4220
+                                ->  Parallel Seq Scan on enrollments e  (cost=0.00..7909.00 rows=312500 width=12) (actual time=0.044..6.102 rows=250000.00 loops=3)
+                                      Buffers: shared hit=564 read=4220
+                                ->  Hash  (cost=1.11..1.11 rows=11 width=32) (actual time=0.017..0.017 rows=11.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on courses c  (cost=0.00..1.11 rows=11 width=32) (actual time=0.013..0.014 rows=11.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=299
+Planning Time: 0.358 ms
+Execution Time: 44.796 ms

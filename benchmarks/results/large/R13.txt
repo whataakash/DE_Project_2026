@@ -1,0 +1,45 @@
+=== R13 run 1 ===
+Merge Anti Join  (cost=20.19..28435.12 rows=541658 width=22) (actual time=1.752..100.476 rows=485879.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=7878 read=2070 written=1405
+  ->  Index Scan using learners_pkey on learners l  (cost=0.42..23420.10 rows=600000 width=22) (actual time=0.004..60.886 rows=600000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=7877 read=1659 written=1273
+  ->  Index Only Scan using idx_learners_referred_by on learners r  (cost=0.42..4369.30 rows=600000 width=4) (actual time=0.223..9.441 rows=179992.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=1 read=411 written=132
+Planning:
+  Buffers: shared hit=303
+Planning Time: 0.406 ms
+Execution Time: 108.930 ms
+=== R13 run 2 ===
+Merge Anti Join  (cost=20.19..28435.12 rows=541658 width=22) (actual time=1.308..67.339 rows=485879.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=9948
+  ->  Index Scan using learners_pkey on learners l  (cost=0.42..23420.10 rows=600000 width=22) (actual time=0.004..31.370 rows=600000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=9536
+  ->  Index Only Scan using idx_learners_referred_by on learners r  (cost=0.42..4369.30 rows=600000 width=4) (actual time=0.004..5.373 rows=179992.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=412
+Planning:
+  Buffers: shared hit=303
+Planning Time: 0.406 ms
+Execution Time: 75.684 ms
+=== R13 run 3 ===
+Merge Anti Join  (cost=20.19..28435.12 rows=541658 width=22) (actual time=1.138..67.055 rows=485879.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=9948
+  ->  Index Scan using learners_pkey on learners l  (cost=0.42..23420.10 rows=600000 width=22) (actual time=0.003..31.323 rows=600000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=9536
+  ->  Index Only Scan using idx_learners_referred_by on learners r  (cost=0.42..4369.30 rows=600000 width=4) (actual time=0.004..5.155 rows=179992.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=412
+Planning:
+  Buffers: shared hit=303
+Planning Time: 0.402 ms
+Execution Time: 75.391 ms

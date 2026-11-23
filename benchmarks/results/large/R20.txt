@@ -1,0 +1,63 @@
+=== R20 run 1 ===
+WindowAgg  (cost=28588.02..35744.33 rows=204467 width=44) (actual time=27.289..37.438 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((lesson_attempts.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=4 read=781, temp read=449 written=451
+  ->  GroupAggregate  (cost=28587.99..32677.33 rows=204467 width=12) (actual time=26.881..37.409 rows=30.00 loops=1)
+        Group Key: ((lesson_attempts.started_at)::date)
+        Buffers: shared hit=4 read=781, temp read=449 written=451
+        ->  Sort  (cost=28587.99..29099.15 rows=204467 width=8) (actual time=26.517..31.880 rows=203144.00 loops=1)
+              Sort Key: ((lesson_attempts.started_at)::date)
+              Sort Method: external merge  Disk: 3592kB
+              Buffers: shared hit=4 read=781, temp read=449 written=451
+              ->  Index Only Scan using idx_attempts_started_xp on lesson_attempts  (cost=0.43..7755.95 rows=204467 width=8) (actual time=0.405..16.949 rows=203144.00 loops=1)
+                    Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=1 read=781
+Planning:
+  Buffers: shared hit=264 read=4
+Planning Time: 0.407 ms
+Execution Time: 38.455 ms
+=== R20 run 2 ===
+WindowAgg  (cost=28588.02..35744.33 rows=204467 width=44) (actual time=23.553..33.866 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((lesson_attempts.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=785, temp read=449 written=451
+  ->  GroupAggregate  (cost=28587.99..32677.33 rows=204467 width=12) (actual time=23.083..33.842 rows=30.00 loops=1)
+        Group Key: ((lesson_attempts.started_at)::date)
+        Buffers: shared hit=785, temp read=449 written=451
+        ->  Sort  (cost=28587.99..29099.15 rows=204467 width=8) (actual time=22.725..28.254 rows=203144.00 loops=1)
+              Sort Key: ((lesson_attempts.started_at)::date)
+              Sort Method: external merge  Disk: 3592kB
+              Buffers: shared hit=785, temp read=449 written=451
+              ->  Index Only Scan using idx_attempts_started_xp on lesson_attempts  (cost=0.43..7755.95 rows=204467 width=8) (actual time=0.009..13.696 rows=203144.00 loops=1)
+                    Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=782
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.388 ms
+Execution Time: 35.156 ms
+=== R20 run 3 ===
+WindowAgg  (cost=28588.02..35744.33 rows=204467 width=44) (actual time=26.239..36.527 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((lesson_attempts.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=785, temp read=449 written=451
+  ->  GroupAggregate  (cost=28587.99..32677.33 rows=204467 width=12) (actual time=25.853..36.503 rows=30.00 loops=1)
+        Group Key: ((lesson_attempts.started_at)::date)
+        Buffers: shared hit=785, temp read=449 written=451
+        ->  Sort  (cost=28587.99..29099.15 rows=204467 width=8) (actual time=25.482..30.910 rows=203144.00 loops=1)
+              Sort Key: ((lesson_attempts.started_at)::date)
+              Sort Method: external merge  Disk: 3592kB
+              Buffers: shared hit=785, temp read=449 written=451
+              ->  Index Only Scan using idx_attempts_started_xp on lesson_attempts  (cost=0.43..7755.95 rows=204467 width=8) (actual time=0.008..14.056 rows=203144.00 loops=1)
+                    Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=782
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.372 ms
+Execution Time: 37.870 ms

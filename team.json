@@ -1,5 +1,27 @@
 {
   "team_number": "T0117",
+  "group_lead": {
+    "name": "Akash Pansari",
+    "enrollment_no": "2501010566",
+    "github": "whataakash"
+  },
+  "members": [
+    {
+      "name": "Aayush Kumar",
+      "enrollment_no": "2501010011",
+      "github": "aayushkumar-nst"
+    },
+    {
+      "name": "Varun Jaiswal",
+      "enrollment_no": "2501010631",
+      "github": "Varun-J-24"
+    },
+    {
+      "name": "Vedaant Chopra",
+      "enrollment_no": "2501010502",
+      "github": "vedaantc25502-lgtm"
+    }
+  ],
   "team": [
     {
       "role": "Group Leader",
