@@ -171,24 +171,16 @@ An FK does not automatically create an index on its referencing columns. The onl
 
 ![ER diagram](../diagrams/er_diagram.png)
 
-The editable SVG is [er_diagram.svg](../diagrams/er_diagram.svg), and complete Mermaid source with every attribute is [er_diagram.mmd](../diagrams/er_diagram.mmd). The image is generated from the schema by `python3 diagrams/render_er.py` (SVG); macOS Quick Look was used for the PNG export.
-
-```mermaid
-erDiagram
-    languages ||--o{ courses : from_lang
-    languages ||--o{ courses : learning_lang
-    courses ||--o{ units : contains
-    units ||--o{ lessons : contains
-    learners |o--o{ learners : refers
-    learners ||--o{ enrollments : enrolls
-    courses ||--o{ enrollments : has
-    learners ||--o{ lesson_attempts : makes
-    lessons ||--o{ lesson_attempts : receives
-    learners ||--o{ daily_activity : records
-    learners ||--o{ league_memberships : competes
-    learners ||--o{ learner_achievements : earns
-    achievements ||--o{ learner_achievements : awarded
-```
+The entity-relationship diagram above illustrates the 11 tables, primary keys, foreign keys, and cardinalities:
+- **languages → courses (1:N):** Each course links two languages (`from_lang` and `learning_lang`).
+- **courses → units (1:N):** Courses contain sequential curricular units.
+- **units → lessons (1:N):** Units contain ordered lesson modules.
+- **learners → enrollments (1:N) & courses → enrollments (1:N):** Resolves the M:N relationship between learners and courses.
+- **learners → lesson_attempts (1:N) & lessons → lesson_attempts (1:N):** Learners attempt lessons across sessions.
+- **learners → daily_activity (1:N):** Daily roll-ups of XP and activity per learner.
+- **learners → league_memberships (1:N):** Weekly competitive cohort placements.
+- **learners → learner_achievements (1:N) & achievements → learner_achievements (1:N):** Resolves the M:N relationship for unlocked badges.
+- **learners → learners (1:N):** Self-referential relationship via `referred_by`.
 
 Every ordinary FK child has exactly one parent; a parent can have zero or many children. A learner has zero or one referrer and can refer zero or many other learners. Enrollments resolve the **M:N** learner/course relationship; learner_achievements resolves **M:N** learner/badge. Attempts are repeatable events connecting learners and lessons. No genuine 1:1 relationship is required by these exports.
 
